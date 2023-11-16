@@ -36,7 +36,7 @@ char rotate_stack_to_bottom(vars_t *vars, stack_t **head)
  */
 char reverse_stack(vars_t *vars, stack_t **head)
 {
-	return rotate_stack_to_bottom(vars, head);
+	return (rotate_stack_to_bottom(vars, head));
 }
 /**
  * append_node_to_end - add stack at the end
