@@ -36,12 +36,5 @@ char (*match_command(vars_t *m, stack_t **r))(vars_t *n, stack_t **r)
 		if (strcmp(operations[i].word, m->tokens[0]) == 0)
 			break;
 	}
-	if (operations[i].f != NULL && m->tokens[2] != NULL)
-	{
-		fprintf(stderr, "L%d: usage: %s integer\n", m->line_number, m->tokens[0]);
-		free_resources(m, *r);
-		exit(EXIT_FAILURE);
-	}
 	return (operations[i].f);
 }
-
