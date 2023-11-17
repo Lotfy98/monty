@@ -8,41 +8,41 @@
  */
 char **split_string(char *buffer, char *delimiter)
 {
-char **tokens = NULL;
-size_t i = 0;
-char **temp_ptr = NULL;
-unsigned int memory_size = 1;
+	char **tokens = NULL;
+	size_t i = 0;
+	char **temp_ptr = NULL;
+	unsigned int memory_size = 1;
 
-if (buffer == NULL)
-{
-return (NULL);
-}
-tokens = malloc(sizeof(char *) * memory_size);
-if (tokens == NULL)
-{
-fprintf(stderr, "Error: realloc failed\n");
-exit(EXIT_FAILURE);
-}
-while (*buffer == ' ' || *buffer == '\t')
-{
-buffer++;
-}
-while ((tokens[i] = cut_string(buffer, delimiter)) != NULL)
-{
-i++;
-if (i >= memory_size)
-{
-temp_ptr = reallocate_memory(tokens, 8 * i, 8 * (i + 1));
-tokens = temp_ptr;
-if (tokens == NULL)
-{
-fprintf(stderr, "Error: realloc failed\n");
-exit(EXIT_FAILURE);
-}
-}
-buffer = NULL;
-}
-return (tokens);
+	if (buffer == NULL)
+	{
+		return (NULL);
+	}
+	tokens = malloc(sizeof(char *) * memory_size);
+	if (tokens == NULL)
+	{
+		fprintf(stderr, "Error: realloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	while (*buffer == ' ' || *buffer == '\n' || *buffer == '\t')
+	{
+		buffer++;
+	}
+	while ((tokens[i] = cut_string(buffer, delimiter)) != NULL)
+	{
+		i++;
+		if (i >= memory_size)
+		{
+			temp_ptr = reallocate_memory(tokens, 8 * i, 8 * (i + 1));
+			tokens = temp_ptr;
+			if (tokens == NULL)
+			{
+				fprintf(stderr, "Error: realloc failed\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		buffer = NULL;
+	}
+	return (tokens);
 }
 /**
  * cut_string - Function to cut string

@@ -64,7 +64,7 @@ void vodika(vars_t *vars, stack_t **head)
 	for (a = 0; vars->arrays[a] != NULL; a++)
 	{
 		vars->line_number = a + 1;
-		if (strcmp(vars->arrays[a], "salto") == 0 || strcmp(vars->arrays[a], "\n") == 0 || strcmp(vars->arrays[a], " ") == 0)
+		if (strcmp(vars->arrays[a], "salto") == 0)
 			continue;
 		vars->tokens = split_string(vars->arrays[a], " ");
 		if (vars->tokens[0][0] == '#')
