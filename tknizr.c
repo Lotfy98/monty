@@ -52,45 +52,45 @@ return (tokens);
  */
 char *cut_string(char *buffer, char *d)
 {
-static char *save_ptr;
-char *string = NULL, *end_ptr = NULL;
+	static char *save_ptr;
+	char *string = NULL, *end_ptr = NULL;
 
-buffer = buffer ? buffer : save_ptr;
-if (*buffer != '\0')
-{
-while (*buffer == ' ' || *buffer == '\n' || *buffer == '\t')
-{
-if (*buffer == '\n')
-{
-end_ptr = buffer, end_ptr++;
-string = "newline";
-save_ptr = end_ptr;
-return (string);
-}
-buffer++;
-}
-end_ptr = buffer;
-if (!*end_ptr)
-save_ptr = '\0';
-else
-{
-string = end_ptr;
-while (*end_ptr != *d && *end_ptr != '\0')
-{
-end_ptr++;
-}
-if (*end_ptr != '\0')
-{
-*end_ptr = '\0';
-end_ptr++;
-}
-save_ptr = end_ptr;
-return (string);
-}
-}
-save_ptr = NULL;
-buffer = NULL;
-return (NULL);
+	buffer = buffer ? buffer : save_ptr;
+	if (*buffer != '\0')
+	{
+		while (*buffer == ' ' || *buffer == '\n' || *buffer == '\t')
+		{
+			if (*buffer == '\n')
+			{
+				buffer++;
+				continue;
+			}
+			buffer++;
+		}
+		end_ptr = buffer;
+		if (!*end_ptr)
+		{
+			save_ptr = '\0';
+		}
+		else
+		{
+			string = end_ptr;
+			while (*end_ptr != *d && *end_ptr != '\0')
+			{
+				end_ptr++;
+			}
+			if (*end_ptr != '\0')
+			{
+				*end_ptr = '\0';
+				end_ptr++;
+			}
+			save_ptr = end_ptr;
+			return (string);
+		}
+	}
+	save_ptr = NULL;
+	buffer = NULL;
+	return (NULL);
 }
 /**
  * reallocate_memory - reallocates memory block
