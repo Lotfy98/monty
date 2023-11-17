@@ -36,25 +36,7 @@ char rotate_stack_to_bottom(vars_t *vars, stack_t **head)
  */
 char reverse_stack(vars_t *vars, stack_t **head)
 {
-	stack_t *temp_node = NULL;
-	stack_t *current_node = *head;
-	int stack_length;
-
-	stack_length = count_stack_items(&*head);
-	if (stack_length < 2)
-		return (0);
-
-	UNUSED(vars);
-	while (current_node != NULL)
-	{
-		temp_node = current_node->prev;
-		current_node->prev = current_node->next;
-		current_node->next = temp_node;
-		current_node = current_node->prev;
-	}
-	if (temp_node != NULL)
-		*head = temp_node->prev;
-	return (0);
+	return (rotate_stack_to_bottom(vars, head));
 }
 /**
  * append_node_to_end - add stack at the end
