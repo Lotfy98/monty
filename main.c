@@ -58,30 +58,30 @@ exit(EXIT_SUCCESS);
  */
 void vodika(vars_t *vars, stack_t **head)
 {
-int a;
-char (*f)(vars_t *m, stack_t **head);
+	int a;
+	char (*f)(vars_t *m, stack_t **head);
 
-for (a = 0; vars->arrays[a] != NULL; a++)
-{
-vars->line_number = a + 1;
-if (strcmp(vars->arrays[a], "salto") == 0)
-continue;
-vars->tokens = split_string(vars->arrays[a], " ");
-if (vars->tokens[0][0] == '#')
-{
-free(vars->tokens);
-continue;
-}
-f = match_command(vars, &*head);
-if (f == NULL)
-{
-fprintf(stderr, "L%d: unknown instruction %s\n",
-vars->line_number, vars->arrays[a]);
-free_resources(vars, *head);
-exit(EXIT_FAILURE);
-}
-else
-f(vars, &*head);
-free(vars->tokens);
-}
+	for (a = 0; vars->arrays[a] != NULL; a++)
+	{
+		vars->line_number = a + 1;
+		if (strcmp(vars->arrays[a], "salto") == 0 || strcmp(vars->arrays[a], "\n") == 0 || strcmp(vars->arrays[a], " ") == 0)
+			continue;
+		vars->tokens = split_string(vars->arrays[a], " ");
+		if (vars->tokens[0][0] == '#')
+		{
+			free(vars->tokens);
+			continue;
+		}
+		f = match_command(vars, &*head);
+		if (f == NULL)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n",
+					vars->line_number, vars->arrays[a]);
+			free_resources(vars, *head);
+			exit(EXIT_FAILURE);
+		}
+		else
+			f(vars, &*head);
+		free(vars->tokens);
+	}
 }
