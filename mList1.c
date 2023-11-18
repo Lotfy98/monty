@@ -88,19 +88,19 @@ return (0);
 */
 char swap_top_elements(vars_t *vars, stack_t **head)
 {
-int temp;
-int count;
+	int count = count_stack_items(head);
 
-count = count_stack_items(&*head);
+	if (count < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", vars->line_number);
+		free_resources(vars, *head);
+		exit(EXIT_FAILURE);
+	}
 
-if (count < 2)
-{
-fprintf(stderr, "L%d: can't swap, stack too short\n", vars->line_number);
-free_resources(vars, *head);
-exit(EXIT_FAILURE);
-}
-temp = (*head)->n;
-(*head)->n = (*head)->next->n;
-(*head)->next->n = temp;
-return (0);
+	stack_t *temp = *head;
+	int temp_value = temp->n;
+	temp->n = temp->next->n;
+	temp->next->n = temp_value;
+
+	return (0);
 }
