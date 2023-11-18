@@ -88,7 +88,8 @@ return (0);
 */
 char swap_top_elements(vars_t *vars, stack_t **head)
 {
-	int count = count_stack_items(head);
+	stack_t *temp;
+	int count = count_stack_items(head), temp_value;
 
 	if (count < 2)
 	{
@@ -97,8 +98,8 @@ char swap_top_elements(vars_t *vars, stack_t **head)
 		exit(EXIT_FAILURE);
 	}
 
-	stack_t *temp = *head;
-	int temp_value = temp->n;
+	temp = *head;
+	temp_value = temp->n;
 	temp->n = temp->next->n;
 	temp->next->n = temp_value;
 
